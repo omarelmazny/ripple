@@ -23,6 +23,8 @@ Later when it’s done, it visualize the collected data into a graph using gnupl
 -	Format the y axis as numbers
 
 I decided the polling interval to be around 4 seconds, since ledgers gets validates between 3 to 6 seconds to validate the transactions, so I thought 4 is a good middle ground to track the progress and increments. The script takes 2 seconds to record the entries and sleeps another 2 seconds.
+
 Result show continues linear increase in the validated ledger in such time. Which means ledger gets validated quickly and regularly to ensure authenticity of the XRP.
+
 Ledger validation duration may vary to handle and validate double spend problems.
 
