@@ -1,0 +1,19 @@
+#!/bin/bash 
+graph=~/graph.txt 
+for i in {1..75};
+do
+server_info=$(curl -H 'Content-Type: application/json' -d '{"method":"server_info","params":[{}]}' https://s1.ripple.com:51234) 
+time=$(echo $server_info | jq -r ".result.info.time" | cut -d "." -f1)
+seq=$(echo $server_info | jq -r ".result.info.validated_ledger.seq")
+echo "$time" , "$seq" >> "$graph";
+sleep 2;
+done
+
+gnuplot -persist <<-EOFMarker
+	set datafile separator ","
+	set xdata time
+	set timefmt "%Y-%b-%d %H:%M:%S"
+	set format x "%Y-%b-%d %H:%M:%S"
+	set format y "%f"
+	plot "$graph" using 1:2 with linespoints
+EOFMarker
